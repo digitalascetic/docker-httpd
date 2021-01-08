@@ -5,9 +5,7 @@
 
 ### Customization
 
-httpd-2.4.46-alpine image with user and group changed to **www-data**. 
-
-Also created _**/var/www/vhosts/**_ empty directory to simplify virtual hosts management.
+httpd-2.4.46-alpine image with user and group changed to **www-data**.
 
 ##### Loaded Modules
 
@@ -43,6 +41,29 @@ _Custom loaded:_
 * mod_proxy.so
 * mod_proxy_fcgi.so
 
+### VirtualHosts
+
+Created _**/var/www/vhosts/**_ empty directory to simplify virtual hosts management.
+
+To configure your virtualhost you can copy your file like:
+
+```
+COPY ./docker/apache/example.conf /usr/local/apache2/conf/sites/example.conf
+```
+
+And later execute:
+
+```
+RUN echo 'Include conf/sites/example.conf' >> /usr/local/apache2/conf/httpd.conf
+```
+
+### Environment variables
+
+Declared one env variable:
+
+```
+APACHE_LOG_DIR='/usr/local/apache2/logs'
+```
 
 ### Build
 ```
